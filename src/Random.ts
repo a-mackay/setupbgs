@@ -1,3 +1,4 @@
+// Contains functions related to random number generation.
 
 interface RemoveRandomItemResult<T> {
     remainingItems: T[];

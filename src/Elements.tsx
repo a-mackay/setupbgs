@@ -1,3 +1,5 @@
+// Contains UI elements which are shared throughout the app.
+
 interface InputProps {
     children: React.ReactNode | null | undefined;
 }
