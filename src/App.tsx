@@ -8,7 +8,7 @@ function App() {
             <h1>Welcome to React Router!</h1>
             <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/vinhos" element={<Vinhos />} />
+                {BGS.map(bg => <Route key={bg.name} path={bg.relativePath} element={bg.element} />)}
             </Routes>
         </div>
     );
@@ -18,22 +18,37 @@ export default App;
 
 function Index() {
     return <div>
-        {BG_NAMES.map(name => <IndexItem key={name} name={name} />)}
+        {BGS.map(bg => <IndexItem
+            key={bg.name}
+            name={bg.name}
+            relativePath={bg.relativePath}
+        />)}
     </div>
 }
 
 interface IndexItemProps {
     name: string;
+    relativePath: string;
 }
 
-function IndexItem({name}: IndexItemProps) {
-    return <Link to={bgNameToSlug(name)}>{name}</Link>
+function IndexItem({name, relativePath}: IndexItemProps) {
+    return <Link to={relativePath}>{name}</Link>
 }
 
-const BG_NAMES: string[] = [
-    "Vinhos",
+const BGS: Bg[] = [
+    makeBg("Vinhos", "/vinhos", <Vinhos />),
 ]
 
-function bgNameToSlug(name: string): string {
-    return name.toLowerCase().replace(/\s/g, "");
+interface Bg {
+    name: string;
+    relativePath: string;
+    element: JSX.Element;
+}
+
+function makeBg(name: string, relativePath: string, element: JSX.Element): Bg {
+    return {
+        name,
+        relativePath,
+        element,
+    }
 }
