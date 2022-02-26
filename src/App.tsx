@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
+import { UnderwaterCities } from "./bgs/UnderwaterCities";
 import { Vinhos } from "./bgs/Vinhos";
 
 function App() {
@@ -37,6 +38,7 @@ function IndexItem({name, relativePath}: IndexItemProps) {
 
 const BGS: Bg[] = [
     makeBg("Vinhos", "/vinhos", <Vinhos />),
+    makeBg("Underwater Cities", "/underwatercities", <UnderwaterCities />)
 ]
 
 interface Bg {

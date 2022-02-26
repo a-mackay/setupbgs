@@ -20,6 +20,48 @@ export function Output({children}: OutputProps) {
     </div>
 }
 
+interface PlayerCountDropdownProps {
+    selectedPlayerCount: number;
+    playerCounts: number[];
+    onChange: (playerCount: number) => void;
+}
+
+export function PlayerCountDropdown({selectedPlayerCount, playerCounts, onChange}: PlayerCountDropdownProps) {
+    return <LabeledDropdown
+        selectedValue={selectedPlayerCount}
+        values={playerCounts}
+        serializeValue={(n: number) => n.toString()}
+        deserializeValue={(value: string) => parseInt(value)}
+        valueToDisplayName={(n: number) => n.toString()}
+        onChange={onChange}
+        label={"Players"}
+    />
+}
+
+interface LabeledDropdownProps<T> {
+    selectedValue: T;
+    values: T[];
+    serializeValue: (value: T) => string;
+    deserializeValue: (value: string) => T;
+    valueToDisplayName: (value: T) => string;
+    onChange: (value: T) => void;
+    label: string;
+}
+
+export function LabeledDropdown<T>({selectedValue, values, serializeValue, deserializeValue, valueToDisplayName, onChange, label}: LabeledDropdownProps<T>) {
+    return <div>
+        <Dropdown
+            selectedValue={selectedValue}
+            values={values}
+            serializeValue={serializeValue}
+            deserializeValue={deserializeValue}
+            valueToDisplayName={valueToDisplayName}
+            onChange={onChange}
+        />
+        <div>{label}</div>
+    </div>
+}
+
 interface DropdownProps<T> {
     selectedValue: T;
     values: T[];
@@ -50,6 +92,22 @@ export function Dropdown<T>({selectedValue, values, serializeValue, deserializeV
     return <select className="dropdown" value={serializeValue(selectedValue)} onChange={onChangeWrapper}>
         {items.map(item => <option value={item.serialized} key={item.serialized}>{item.name}</option>)}
     </select>
+}
+
+interface LabeledCheckboxProps {
+    isChecked: boolean;
+    onChange: () => void;
+    label: string;
+}
+
+export function LabeledCheckbox({isChecked, onChange, label}: LabeledCheckboxProps) {
+    return <div>
+        <Checkbox
+            isChecked={isChecked}
+            onChange={onChange}
+        />
+        <div>{label}</div>
+    </div>
 }
 
 interface CheckboxProps {

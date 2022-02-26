@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { removeRandomItemFromArray } from "../Random";
-import { Button, Checkbox, Dropdown, Input, Output } from "../Elements";
+import { Button, LabeledCheckbox, Dropdown, Input, Output, PlayerCountDropdown } from "../Elements";
 
 export function Vinhos() {
     const [useExpansionRegions, setUseExpansionRegions] = useState(false);
@@ -52,22 +52,18 @@ export function Vinhos() {
     return <div>
         <h2>Vinhos</h2>
         <Input>
-            <Checkbox
+            <LabeledCheckbox
                 isChecked={useExpansionRegions}
                 onChange={() => setUseExpansionRegions(bool => !bool)}
+                label={"Use expansion regions?"}
             />
-            <div>Use expansion regions?</div>
         </Input>
         <Input>
-            <Dropdown
-                selectedValue={playerCount}
-                values={[2, 3, 4]}
-                serializeValue={num => num.toString()}
-                deserializeValue={s => parseInt(s)}
-                valueToDisplayName={num => num.toString()}
+            <PlayerCountDropdown
+                selectedPlayerCount={playerCount}
+                playerCounts={[2, 3, 4]}
                 onChange={num => setPlayerCount(num)}
             />
-            <div>Players</div>
         </Input>
         <Input>
             <Button name="Generate" onClick={() => setRemovedRegions(generateRemovedRegions())}/>
