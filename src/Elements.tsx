@@ -1,5 +1,15 @@
 // Contains UI elements which are shared throughout the app.
 
+interface ColumnProps {
+    children: React.ReactNode | null | undefined;
+}
+
+export function Column({children}: ColumnProps) {
+    return <div className="column">
+        {children}
+    </div>
+}
+
 interface InputProps {
     children: React.ReactNode | null | undefined;
 }
@@ -49,7 +59,7 @@ interface LabeledDropdownProps<T> {
 }
 
 export function LabeledDropdown<T>({selectedValue, values, serializeValue, deserializeValue, valueToDisplayName, onChange, label}: LabeledDropdownProps<T>) {
-    return <div>
+    return <div className="labeled-dropdown">
         <Dropdown
             selectedValue={selectedValue}
             values={values}
@@ -101,7 +111,7 @@ interface LabeledCheckboxProps {
 }
 
 export function LabeledCheckbox({isChecked, onChange, label}: LabeledCheckboxProps) {
-    return <div>
+    return <div className="labeled-checkbox">
         <Checkbox
             isChecked={isChecked}
             onChange={onChange}

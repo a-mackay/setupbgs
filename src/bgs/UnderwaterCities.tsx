@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dropdown, Input, LabeledCheckbox, Output, PlayerCountDropdown } from "../Elements";
+import { LabeledDropdown, Input, LabeledCheckbox, Output, PlayerCountDropdown } from "../Elements";
 
 export function UnderwaterCities() {
     const [variant, setVariant] = useState(VARIANTS[0]);
@@ -11,13 +11,14 @@ export function UnderwaterCities() {
     return <div>
         <h2>Underwater Cities</h2>
         <Input>
-            <Dropdown
+            <LabeledDropdown
                 selectedValue={variant}
                 serializeValue={variant => variant.name}
                 deserializeValue={value => VARIANTS.find(v => v.name == value) as Variant}
                 values={VARIANTS}
                 valueToDisplayName={variant => variant.name}
                 onChange={variant => setVariant(variant)}
+                label="Variant"
             />
         </Input>
         <Input>
@@ -35,14 +36,18 @@ export function UnderwaterCities() {
             />
         </Input>
         <Output>
-            <div>Setup</div>
-            <ol>
-                {rules.setup.map(rule => <li>{rule}</li>)}
-            </ol>
-            <div>New Rules</div>
-            <ol>
-                {rules.rules.map(rule => <li>{rule}</li>)}
-            </ol>
+            <div className="rules">
+                <h3>Setup</h3>
+                <ol>
+                    {rules.setup.map(rule => <li>{rule}</li>)}
+                </ol>
+            </div>
+            <div className="rules">
+                <h3>New Rules</h3>
+                <ol>
+                    {rules.rules.map(rule => <li>{rule}</li>)}
+                </ol>
+            </div>
         </Output>
     </div>
 }

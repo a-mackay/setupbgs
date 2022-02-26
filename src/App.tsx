@@ -6,7 +6,6 @@ import { Vinhos } from "./bgs/Vinhos";
 function App() {
     return (
         <div className="app">
-            <h1>Welcome to React Router!</h1>
             <Routes>
                 <Route path="/" element={<Index />} />
                 {BGS.map(bg => <Route key={bg.name} path={bg.relativePath} element={bg.element} />)}
@@ -18,7 +17,7 @@ function App() {
 export default App;
 
 function Index() {
-    return <div>
+    return <div className="index">
         {BGS.map(bg => <IndexItem
             key={bg.name}
             name={bg.name}
@@ -33,7 +32,9 @@ interface IndexItemProps {
 }
 
 function IndexItem({name, relativePath}: IndexItemProps) {
-    return <Link to={relativePath}>{name}</Link>
+    return <div className="index-item">
+        <Link to={relativePath}>{name}</Link>
+    </div>
 }
 
 const BGS: Bg[] = [

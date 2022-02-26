@@ -2,11 +2,43 @@
     text-align: center;
 }
 
+.column {
+    max-width: 300px;
+    min-width: 300px;
+    background-color: antiquewhite;
+    margin: 0px;
+    padding: 20px;
+}
+
+.index-item {
+    margin: 15px;
+}
+
 .input {
     display: flex;
     flex-direction: row;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.output {
+    display: flex;
+    flex-direction: column;
+}
+
+.labeled-checkbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.labeled-dropdown {
+    display: flex;
+    flex-direction: row;
+}
+
+.rules {
+    margin: 15px;
+    text-align: left;
 }
 
 .checkbox {

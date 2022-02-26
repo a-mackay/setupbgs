@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { removeRandomItemFromArray } from "../Random";
-import { Button, LabeledCheckbox, Dropdown, Input, Output, PlayerCountDropdown } from "../Elements";
+import { Button, LabeledCheckbox, Column, Input, Output, PlayerCountDropdown } from "../Elements";
 
 export function Vinhos() {
     const [useExpansionRegions, setUseExpansionRegions] = useState(false);
@@ -49,7 +49,7 @@ export function Vinhos() {
         }
     }
 
-    return <div>
+    return <Column>
         <h2>Vinhos</h2>
         <Input>
             <LabeledCheckbox
@@ -71,5 +71,5 @@ export function Vinhos() {
         <Output>
             {RemovedRegionsOutput(removedRegions)}
         </Output>
-    </div>
+    </Column>
 }
