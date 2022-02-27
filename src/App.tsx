@@ -2,6 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import { UnderwaterCities } from "./bgs/UnderwaterCities";
 import { Vinhos } from "./bgs/Vinhos";
+import { Column } from "./Elements";
 
 function App() {
     return (
@@ -18,11 +19,14 @@ export default App;
 
 function Index() {
     return <div className="index">
-        {BGS.map(bg => <IndexItem
-            key={bg.name}
-            name={bg.name}
-            relativePath={bg.relativePath}
-        />)}
+        <Column>
+            <h2>Games</h2>
+            {BGS.map(bg => <IndexItem
+                key={bg.name}
+                name={bg.name}
+                relativePath={bg.relativePath}
+            />)}
+        </Column>
     </div>
 }
 

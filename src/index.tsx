@@ -4,9 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { configFromEnv } from "./config";
 
 ReactDOM.render(
-    <BrowserRouter basename="/setupbgs">
+    <BrowserRouter basename={configFromEnv().baseName ?? undefined}>
         <React.StrictMode>
             <App />
         </React.StrictMode>
