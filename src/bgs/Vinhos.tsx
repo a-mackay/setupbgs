@@ -5,7 +5,7 @@ import { Button, LabeledCheckbox, Column, Input, Output, PlayerCountDropdown } f
 export function Vinhos() {
     const [useExpansionRegions, setUseExpansionRegions] = useState(false);
     const [playerCount, setPlayerCount] = useState(3);
-    const [removedRegions, setRemovedRegions] = useState<number[] | null>(null);
+    // const [removedRegions, setRemovedRegions] = useState<number[] | null>(null);
     const baseRegions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     const allRegions = useExpansionRegions ? baseRegions.concat([10, 11]) : baseRegions
 
@@ -34,6 +34,8 @@ export function Vinhos() {
         return removedRegions;
     }
 
+    const removedRegions = generateRemovedRegions()
+
     function RemovedRegionsOutput(removedRegions: number[] | null) {
         if (removedRegions === null) {
             return null;
@@ -44,7 +46,9 @@ export function Vinhos() {
         } else {
             return <div>
                 <div>Remove the following regions:</div>
-                {removedRegions.map(num => <div key={num}>{num}</div>)}
+                <ul>
+                    {removedRegions.map(num => <li key={num}>{num}</li>)}
+                </ul>
             </div>
         }
     }
@@ -52,21 +56,16 @@ export function Vinhos() {
     return <Column>
         <h2>Vinhos</h2>
         <Input>
-            <LabeledCheckbox
-                isChecked={useExpansionRegions}
-                onChange={() => setUseExpansionRegions(bool => !bool)}
-                label={"Use expansion regions?"}
-            />
-        </Input>
-        <Input>
             <PlayerCountDropdown
                 selectedPlayerCount={playerCount}
                 playerCounts={[2, 3, 4]}
                 onChange={num => setPlayerCount(num)}
             />
-        </Input>
-        <Input>
-            <Button name="Generate" onClick={() => setRemovedRegions(generateRemovedRegions())}/>
+            <LabeledCheckbox
+                isChecked={useExpansionRegions}
+                onChange={() => setUseExpansionRegions(bool => !bool)}
+                label={"Use expansion regions?"}
+            />
         </Input>
         <Output>
             {RemovedRegionsOutput(removedRegions)}

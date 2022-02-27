@@ -25,7 +25,7 @@ interface OutputProps {
 }
 
 export function Output({children}: OutputProps) {
-    return <div className="input">
+    return <div className="output">
         {children}
     </div>
 }

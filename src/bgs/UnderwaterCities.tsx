@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LabeledDropdown, Input, LabeledCheckbox, Output, PlayerCountDropdown } from "../Elements";
+import { LabeledDropdown, Input, LabeledCheckbox, Output, PlayerCountDropdown, Column } from "../Elements";
 
 export function UnderwaterCities() {
     const [variant, setVariant] = useState(VARIANTS[0]);
@@ -8,7 +8,7 @@ export function UnderwaterCities() {
 
     const rules = rulesFor(variant, useQuickStart, playerCount);
 
-    return <div>
+    return <Column>
         <h2>Underwater Cities</h2>
         <Input>
             <LabeledDropdown
@@ -20,15 +20,11 @@ export function UnderwaterCities() {
                 onChange={variant => setVariant(variant)}
                 label="Variant"
             />
-        </Input>
-        <Input>
             <LabeledCheckbox
                 onChange={() => setUseQuickStart(bool => !bool)}
                 isChecked={useQuickStart}
                 label={"Use Quick Start rules?"}
             />
-        </Input>
-        <Input>
             <PlayerCountDropdown
                 selectedPlayerCount={playerCount}
                 playerCounts={[1, 2, 3, 4]}
@@ -36,20 +32,23 @@ export function UnderwaterCities() {
             />
         </Input>
         <Output>
-            <div className="rules">
-                <h3>Setup</h3>
-                <ol>
-                    {rules.setup.map(rule => <li>{rule}</li>)}
-                </ol>
-            </div>
-            <div className="rules">
-                <h3>New Rules</h3>
-                <ol>
-                    {rules.rules.map(rule => <li>{rule}</li>)}
-                </ol>
-            </div>
+            {rulesDiv("Setup", rules.setup)}
+            {rulesDiv("New Rules", rules.rules)}
         </Output>
-    </div>
+    </Column>
+}
+
+function rulesDiv(heading: string, someRules: string[]) {
+    if (someRules.length === 0) {
+        return null;
+    } else {
+        return <div className="rules">
+            <h3>{heading}</h3>
+            <ol>
+                {someRules.map(rule => <li>{rule}</li>)}
+            </ol>
+        </div>
+    }
 }
 
 const VARIANTS: Variant[] = [
